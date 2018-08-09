@@ -49,14 +49,6 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
     ],
     'params' => $params,
 ];

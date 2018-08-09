@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\traits\AliasTrait;
+use common\traits\UploadImageTrait;
 use Yii;
 use yii\web\UploadedFile;
 
@@ -24,12 +25,7 @@ class BaseEntity extends \yii\db\ActiveRecord
 {
 
     use AliasTrait;
-
-    /**
-     * Uploaded file
-     * @var
-     */
-    public $imageFile;
+    use UploadImageTrait;
 
     /**
      * {@inheritdoc}
@@ -72,34 +68,5 @@ class BaseEntity extends \yii\db\ActiveRecord
             'date' => 'Дата',
             'imageFile' => 'Картинка',
         ];
-    }
-
-    /**
-     * Upload image file
-     * @return bool
-     */
-    public function upload()
-    {
-        if ($this->validate()) {
-            $this->imageFile->saveAs(Yii::getAlias('@uploadfile'). '/' . Yii::$app->controller::$urlString . '/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Set filename and save model
-     * @return bool
-     */
-    public function saveModel()
-    {
-        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
-        if($this->imageFile) {
-            if ($this->upload()) {
-                $this->image = $this->imageFile->name;
-            }
-        }
-        return $this->save();
     }
 }
