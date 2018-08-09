@@ -71,7 +71,7 @@ class BaseController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->saveModel()) {
-                return $this->redirect('/admin'.static::$urlString);
+                return $this->redirect($this->createRedirectUrl($model));
             }
         }
 
@@ -93,7 +93,7 @@ class BaseController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->saveModel()) {
-                return $this->redirect('/admin/'.static::$urlString);
+                return $this->redirect($this->createRedirectUrl($model));
             }
         }
 
@@ -132,5 +132,15 @@ class BaseController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Create redirect url
+     * @param $model
+     * @return string
+     */
+    public function createRedirectUrl($model)
+    {
+        return '/admin/'.static::$urlString;
     }
 }

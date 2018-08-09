@@ -5,11 +5,9 @@ namespace common\models;
 use common\traits\AliasTrait;
 use common\traits\UploadImageTrait;
 use Yii;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 
 /**
- * This is the model class for table "catalog".
+ * This is the model class for table "products".
  *
  * @property int $id
  * @property string $name
@@ -20,19 +18,20 @@ use yii\helpers\Url;
  * @property string $image
  * @property int $public
  * @property string $alias
- * @property int $parent_id
+ * @property int $category_id
+ * @property int $manufacture_id
  */
-class Catalog extends \yii\db\ActiveRecord
+class Products extends \yii\db\ActiveRecord
 {
-    use UploadImageTrait;
     use AliasTrait;
+    use UploadImageTrait;
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'catalog';
+        return 'products';
     }
 
     /**
@@ -42,7 +41,7 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return [
             [['text', 'image'], 'string'],
-            [['public', 'parent_id'], 'integer'],
+            [['public', 'category_id', 'manufacture_id'], 'integer'],
             [['alias'], 'required'],
             [['name', 'title', 'description', 'keywords', 'alias'], 'string', 'max' => 255],
             [['alias'], 'unique'],
@@ -64,33 +63,17 @@ class Catalog extends \yii\db\ActiveRecord
             'image' => 'Image',
             'public' => 'Public',
             'alias' => 'Alias',
-            'parent_id' => 'Parent ID',
+            'category_id' => 'Category ID',
+            'manufacture_id' => 'Manufacture ID',
         ];
     }
 
-    /**
-     * get all first level categories
-     * @param $id integer
-     * @return array
-     */
-    public static function getFirstLevelCategories($id)
+    public function getParentCatalogId()
     {
-        $categories = self::find()->where(['parent_id' => 0]);
-        if ($id) {
-            $categories->andWhere(['<>', 'id', $id]);
+        $category = Catalog::find()->where(['id' => $this->category_id])->one();
+        if($category) {
+            return $category->parent_id;
         }
-        $categories = $categories->all();
-        return [0 => 'Категория первого уровня'] + ArrayHelper::map($categories, 'id', 'name');
-    }
-
-    /**
-     * Get child categories from parent id
-     * @param $parent_id
-     * @return array
-     */
-    public static function getChildCategories($parent_id)
-    {
-        $categories = self::find()->where(['parent_id' => $parent_id])->all();
-        return ArrayHelper::map($categories, 'id', 'name');
+        return null;
     }
 }

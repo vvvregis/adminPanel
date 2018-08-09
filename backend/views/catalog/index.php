@@ -29,7 +29,7 @@ $parent = Yii::$app->request->get('parent_id');
                     if($model->parent_id == 0) {
                         return Html::a($model->name, ['index', 'parent_id' => $model->id]);
                     } else {
-                        return $model->name;
+                        return Html::a($model->name, ['products/index', 'parent_id' => $model->parent_id, 'category_id' => $model->id]);
                     }
                 },
             ],
