@@ -71,6 +71,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                     ["label" => "Акции", "url" => "/admin/action", "icon" => "home"],
                                     ["label" => "Новости", "url" => "/admin/news", "icon" => "home"],
                                     ["label" => "Производители", "url" => "/admin/manufacture", "icon" => "home"],
+                                    ["label" => "Каталог", "url" => "/admin/catalog", "icon" => "home"],
                                     /*["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
                                     ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
                                     [
