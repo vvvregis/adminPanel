@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Article Categories';
+$this->title = 'Категории статей';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-categories-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Article Categories', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать категорию статьи', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

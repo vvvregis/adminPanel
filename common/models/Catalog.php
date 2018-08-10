@@ -56,15 +56,15 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Название категории',
             'title' => 'Title',
             'description' => 'Description',
             'keywords' => 'Keywords',
-            'text' => 'Text',
-            'image' => 'Image',
-            'public' => 'Public',
-            'alias' => 'Alias',
-            'parent_id' => 'Parent ID',
+            'text' => 'Текст',
+            'image' => 'Картинка',
+            'public' => 'Публикация',
+            'alias' => 'Алиас',
+            'parent_id' => 'Родительская категория',
         ];
     }
 

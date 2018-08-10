@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Action */
 
-$this->title = 'Create Action';
-$this->params['breadcrumbs'][] = ['label' => 'Actions', 'url' => ['index']];
+$this->title = 'Создать акцию';
+$this->params['breadcrumbs'][] = ['label' => 'Акции', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="action-create">

@@ -55,16 +55,16 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Название продукта',
             'title' => 'Title',
             'description' => 'Description',
             'keywords' => 'Keywords',
             'text' => 'Text',
-            'image' => 'Image',
-            'public' => 'Public',
-            'alias' => 'Alias',
-            'category_id' => 'Category ID',
-            'manufacture_id' => 'Manufacture ID',
+            'image' => 'Картинка',
+            'public' => 'Публикация',
+            'alias' => 'Алиас',
+            'category_id' => 'Категория продукта',
+            'manufacture_id' => 'Производитель продукта',
         ];
     }
 

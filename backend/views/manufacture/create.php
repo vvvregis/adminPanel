@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Manufacture */
 
-$this->title = 'Create Manufacture';
-$this->params['breadcrumbs'][] = ['label' => 'Manufactures', 'url' => ['index']];
+$this->title = 'Создать производителя';
+$this->params['breadcrumbs'][] = ['label' => 'Производители', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="manufacture-create">

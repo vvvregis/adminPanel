@@ -42,8 +42,8 @@ class Manufacture extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'image' => 'Image',
+            'name' => 'Название производителя',
+            'image' => 'Картинка',
         ];
     }
 }

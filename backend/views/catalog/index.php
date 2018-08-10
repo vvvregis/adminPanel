@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Catalogs';
+$this->title = 'Категории каталога';
 $this->params['breadcrumbs'][] = $this->title;
 $parent = Yii::$app->request->get('parent_id');
 ?>
@@ -15,7 +15,7 @@ $parent = Yii::$app->request->get('parent_id');
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Catalog', $parent?['create', 'parent_id' => $parent]:['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать категорию каталога', $parent?['create', 'parent_id' => $parent]:['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
