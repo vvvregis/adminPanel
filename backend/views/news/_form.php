@@ -20,7 +20,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'text')->widget(\dosamigos\ckeditor\CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'full'
+    ]) ?>
 
     <?= $form->field($model, 'public')->checkbox() ?>
 

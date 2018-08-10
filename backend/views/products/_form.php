@@ -30,7 +30,10 @@ if($model->isNewRecord){
 
     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'text')->widget(\dosamigos\ckeditor\CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'full'
+    ]) ?>
 
     <?php if($model->image):?>
         <?= Html::img('/uploads/products/' . $model->image, ['class' => 'backend-preview-img']);?>
