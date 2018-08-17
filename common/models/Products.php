@@ -26,6 +26,10 @@ class Products extends \yii\db\ActiveRecord
     use AliasTrait;
     use UploadImageTrait;
 
+    public $m_id;
+    public $m_name;
+    public $m_image;
+
     /**
      * {@inheritdoc}
      */

@@ -1,6 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Catalog;
+use common\models\Manufacture;
+use common\models\Products;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -72,7 +75,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $this->layout = false;
+        $categories = Catalog::find()->where(['parent_id' => 0, 'public' => 1])->all();
+        return $this->render('index', ['categories' => $categories]);
     }
 
     /**
@@ -211,5 +216,55 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionCatalog($alias)
+    {
+        $this->layout = false;
+        $category = Catalog::find()->where(['alias' => $alias])->one();
+        if($category) {
+            $categoryList = Catalog::find()->where(['parent_id' => $category->id])->all();
+            return $this->render('catalog', ['categoryInfo' => $category, 'categoryList' => $categoryList]);
+        }
+        return null;
+
+    }
+
+    public function actionSubcategory($alias)
+    {
+        $this->layout = false;
+        $category = Catalog::find()->where(['alias' => $alias])->one();
+        if($category) {
+            $manufactures = Products::find()
+                ->select('manufacture.id as m_id, manufacture.name as m_name, manufacture.image as m_image')
+                ->leftJoin('manufacture', 'products.manufacture_id = manufacture.id')
+                ->where(['products.public' => 1, 'products.category_id' => $category->id])
+                ->groupBy('products.manufacture_id')
+                ->all();
+
+            return $this->render('subcategory', ['categoryInfo' => $category, 'categoryList' => $manufactures]);
+        }
+        return null;
+    }
+
+    public function actionProducts($alias, $manufacture_id)
+    {
+        $this->layout = false;
+        $category = Catalog::find()->where(['alias' => $alias])->one();
+        if($category){
+            $products = Products::find()
+                ->where(['category_id' => $category->id, 'manufacture_id' => $manufacture_id, 'public' => 1])
+                ->all();
+
+            return $this->render('products', ['categoryInfo' => $category, 'products' => $products]);
+        }
+        return null;
+    }
+
+    public function actionProduct($alias)
+    {
+        $this->layout = false;
+        $product = Products::find()->where(['alias' => $alias, 'public' => 1])->one();
+        return $this->render('product', ['product' => $product]);
     }
 }
