@@ -69,23 +69,18 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li class="active"><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li class="active"><a href="index.html">Каталог</a></li>
+                    <li><a href="shop.html">О компании</a></li>
+                    <li><a href="shop.html">Партнеры</a></li>
+                    <li><a href="shop.html">Новости</a></li>
+                    <li><a href="shop.html">Статьи</a></li>
+                    <li><a href="product-details.html">Контакты</a></li>
                 </ul>
             </nav>
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
-            </div>
-            <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="/img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="/img/core-img/search.png" alt=""> Search</a>
+                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Корзина <span>(0)</span></a>
+                <!--      <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a> -->
+                <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Поиск</a>
             </div>
             <!-- Social Button -->
             <div class="social-info d-flex justify-content-between">
