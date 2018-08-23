@@ -3,6 +3,8 @@ namespace frontend\controllers;
 
 use common\models\Catalog;
 use common\models\Manufacture;
+use common\models\Pages;
+use common\models\Pivo;
 use common\models\Products;
 use Yii;
 use yii\base\InvalidParamException;
@@ -75,7 +77,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = false;
         $categories = Catalog::find()->where(['parent_id' => 0, 'public' => 1])->all();
         return $this->render('index', ['categories' => $categories]);
     }
@@ -101,6 +102,12 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function beforeAction($action)
+    {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
     }
 
     /**
@@ -220,7 +227,6 @@ class SiteController extends Controller
 
     public function actionCatalog($alias)
     {
-        $this->layout = false;
         $category = Catalog::find()->where(['alias' => $alias])->one();
         if($category) {
             $categoryList = Catalog::find()->where(['parent_id' => $category->id])->all();
@@ -232,7 +238,6 @@ class SiteController extends Controller
 
     public function actionSubcategory($alias)
     {
-        $this->layout = false;
         $category = Catalog::find()->where(['alias' => $alias])->one();
         if($category) {
             $manufactures = Products::find()
@@ -249,7 +254,6 @@ class SiteController extends Controller
 
     public function actionProducts($alias, $manufacture_id)
     {
-        $this->layout = false;
         $category = Catalog::find()->where(['alias' => $alias])->one();
         if($category){
             $products = Products::find()
@@ -263,8 +267,39 @@ class SiteController extends Controller
 
     public function actionProduct($alias)
     {
-        $this->layout = false;
         $product = Products::find()->where(['alias' => $alias, 'public' => 1])->one();
         return $this->render('product', ['product' => $product]);
+    }
+
+    public function actionAddToCart()
+    {
+        $qty = Yii::$app->request->post('qty');
+        $productId = Yii::$app->request->post('id');
+        $product = Products::find()->where(['id' => $productId])->one();
+
+        if($product) {
+            $cartElement = Yii::$app->cart->put($product, $qty, []);
+            $elements = Yii::$app->cart->elements;
+            $response['error'] = false;
+            $response['count'] = count($elements);
+        } else {
+            $response['error'] = true;
+            $response['msg'] = 'Данного товара не существует';
+        }
+
+        return json_encode($response);
+
+    }
+
+    public function actionCart()
+    {
+        $productsInCart = Yii::$app->cart->elements;
+        return $this->render('cart', ['productsInCart' => $productsInCart]);
+    }
+
+    public function actionPage($alias)
+    {
+        $page = Pages::find()->where(['alias' => $alias, 'public' => 1])->one();
+        return $this->render('page', ['page' => $page]);
     }
 }

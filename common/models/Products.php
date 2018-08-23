@@ -4,7 +4,10 @@ namespace common\models;
 
 use common\traits\AliasTrait;
 use common\traits\UploadImageTrait;
+use dvizh\cart\interfaces\CartElement;
+use phpDocumentor\Reflection\Types\Self_;
 use Yii;
+use yii2mod\cart\models\CartItemInterface;
 
 /**
  * This is the model class for table "products".
@@ -21,7 +24,7 @@ use Yii;
  * @property int $category_id
  * @property int $manufacture_id
  */
-class Products extends \yii\db\ActiveRecord
+class Products extends \yii\db\ActiveRecord implements CartElement
 {
     use AliasTrait;
     use UploadImageTrait;
@@ -79,5 +82,37 @@ class Products extends \yii\db\ActiveRecord
             return $category->parent_id;
         }
         return null;
+    }
+
+    public function getCartName()
+    {
+        return $this->name;
+    }
+
+    public function getCartId()
+    {
+        return $this->id;
+    }
+
+    public function getCartPrice(): int
+    {
+        return 1;
+    }
+
+    public function getCartOptions()
+    {
+        return null;
+    }
+
+
+    public static function getProductImage($id)
+    {
+        return self::find()->select('image')->where(['id' => $id])->one();
+    }
+
+    public static function getCartItemCount()
+    {
+        $productsInCart = Yii::$app->cart->elements;
+        return $productsInCart?count($productsInCart):0;
     }
 }

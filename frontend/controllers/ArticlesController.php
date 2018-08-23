@@ -11,7 +11,6 @@ class ArticlesController extends Controller
 {
     public function actionList($id = null)
     {
-        $this->layout = false;
         $articlesList = Article::find()->where(['public' => 1]);
 
         if($id) {
@@ -26,7 +25,6 @@ class ArticlesController extends Controller
 
     public function actionIndex($alias)
     {
-        $this->layout = false;
         $article = Article::find()->where(['alias' => $alias])->one();
         return $this->render('article', ['article' => $article]);
     }

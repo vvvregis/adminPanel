@@ -17,6 +17,12 @@ return [
             'enableCsrfValidation' => true,
             'cookieValidationKey' => 'xxxxxxx',
         ],
+        'cart' => [
+            'class' => 'dvizh\cart\Cart',
+            'currency' => '', //Валюта
+            'currencyPosition' => 'after', //after или before (позиция значка валюты относительно цены)
+            'priceFormat' => [2,'.', ''], //Форма цены
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
